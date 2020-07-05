@@ -1,0 +1,53 @@
+/*Header*/
+.container{
+	width: 60%;
+}
+.my_jumbotron{
+	padding: 15px;
+}
+.btn_menu{
+	border:transparent;
+}
+
+/*footer*/
+footer {
+	width: 100%;
+	position: fixed;
+	bottom: 0;
+	right: 0;
+	background: #343a40;
+	color: white;
+	height: 40px;
+	display: flex;
+}
+.div_table{
+	margin-bottom: 10%;
+	width:100%;
+}
+#myChart{
+	display: block;
+    width: 590px !important;
+    height: 488px !important;
+    margin: 0px auto;
+	margin-bottom: 60px;
+}
+
+#myChartgraficoCorrelacao2{
+	display: block;
+    width: 590px !important;
+    height: 488px !important;
+    margin: 0px auto;
+	margin-bottom: 60px;
+}
+
+#Change_Probabilidade{
+	margin-top: 5px;
+}
+
+.my_btn_link{
+	margin: 0% 35% 0% 35%;
+}
+
+.myThumb{
+	border:2px black solid;
+}

@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Tribe System</title>
+  <link rel="stylesheet" href="bootstrap/css/glyphicon.min.css">
+  <!-- <script src="bootstrap/js/jquery-slim.js"></script> -->
+  <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
+  <link rel="stylesheet" href="bootstrap/css/bootstrap-grid.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <!-- <script src="bootstrap/js/bootstrap.js"></script> -->
+  <link rel="stylesheet" href="bootstrap/css/icon.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div class="jumbotron my_jumbotron" style="margin-bottom:0px;">
+      <h1>Clever Manager</h1>
+      <p>Tribe statistical analysis</p>
+
+    </div> 
+
+      <nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
+          
+          <button class="navbar-toggler" data-toggle="collapse" data-target="#collapse_target">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          
+          <div class="collapse navbar-collapse" id="collapse_target">
+            
+            <div class="col-md-3">
+              <a class="navbar-brand" >TRIBE </a>
+              <span class="navbar-text" >Clever Manager</span>
+            </div>
+            <div class="col-md-8">
+              <ul class="navbar-nav navbar-right">
+                  <li class="nav-item">
+                    <button class="nav-link bg-dark btn_menu" id="btn_aboutSystem" onclick="Change(this.id)">Sobre o Sistema</button>
+                  </li>
+                  <li class="nav-item dropdown">
+                    <button class="nav-link dropdown-toggle bg-dark btn_menu" data-toggle="dropdown" data-target="dropdown_target" >
+                      Estatística Descritiva
+                      <span class="caret"></span>
+                    </button>
+                    <div class="dropdown-menu" arial-labelledby="dropdown_target">
+                      <button class="dropdown-item navItemCustom bg-light" id="quali_nominal"   onclick="Change(this.id);Opcao(this.id)" type="button"> Qualitativa Nominal </button>
+                      <button class="dropdown-item navItemCustom bg-light" id="quali_ordinal"   onclick="Change(this.id);Opcao(this.id)" type="button"> Qualitativa Ordinal </button>
+                      <button class="dropdown-item navItemCustom bg-light" id="quanti_discreta" onclick="Change(this.id);Opcao(this.id)" type="button"> Quantitativa Discreta </button>
+                      <button class="dropdown-item navItemCustom bg-light" id="quanti_continua" onclick="Change(this.id);Opcao(this.id)" type="button"> Quantitativa Continua </button>
+
+                    </div>
+                  </li>
+              
+                  <li class="nav-item">
+                    <button class="nav-link bg-dark btn_menu" id="btn_probabilidade" onclick="Change(this.id)">Probabilidade</button>
+                  </li>
+                  <li class="nav-item">
+                    <button class="nav-link bg-dark btn_menu" id="btn_CorreRegres" onclick="Change(this.id)">Correlação e Regressão</button>
+                  </li>
+                  <li class="nav-item">
+                    <button class="nav-link bg-dark btn_menu"id="btn_SobreNos" onclick="Change(this.id)">Sobre nós</button>
+                  </li>
+              </ul>
+            </div>
+            <div class="col-md-1">
+                <button type="button" class="btn btn-outline-light" onclick="Function_Sair()">Sair</button>
+            </div>
+          </div>
+      </nav>
+      
+    
+      <div class="container">
+
+          <!---------------------------- Aba sobre o Sistema --------------------->
+          <div id="Change_aboutSystem">
+            <div class="container" style="width: 80%; margin-top: 5%; font-size: 30px; border: 2px gray dashed;">
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Analisar dados é uma tarefa primordial para qualquer tipo de tomada de decisão. Seja ela profissional ou pessoal, tudo fica melhor quando temos uma ferramenta que nos ajuda a realizar tal tarefa. Nós estamos falando do conjunto de ferramentas que está disponível no TRIBE system, que é um conjunto de ferramentas de análise de dados.</p>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nós sabemos que os principais objetivos de toda ferramenta de Análise de Dados (Business Intelligence) é gerar relatórios e Dashboards. Porém, com o Tribe system é possível gerar uma visão de 360 graus com suas métricas mais importantes em um só lugar.</p>
+            </div>
+          </div>
+
+
+          <!---------------------------- Aba estatística Descritiva --------------------->
+
+          <div id="Change_EstatDescritiva">
+              <nav class="navbar mt-0">
+                <!--Titulo-->
+                <h4 style="margin: 0px auto;" id="TypeStatistic"></h4>
+                <input type="hidden" id="indice" value=''>
+              </nav>
+              <hr>
+            <div class="row">
+                <!-- AMOSTRA OU POPULAÇÂO -->
+                <div class="col-md-3"></div>
+                <div class="input-group col-md-3">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text">
+                    <input type="radio" name="opt" aria-label="Radio button for following text input">
+                    </div>
+                  </div>
+                  <input type="text" class="form-control" aria-label="Text input with radio button" value="AMOSTRA" disabled>
+                </div>
+                <div class="input-group col-md-3">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text">
+                    <input type="radio" name="opt" aria-label="Radio button for following text input" checked>
+                    </div>
+                  </div>
+                  <input type="text" class="form-control" aria-label="Text input with radio button" value="POPULAÇÃO" disabled>
+                </div>
+            </div>
+            <hr>
+                <!-- ENTRADA DE DADOS -->
+            <div class="row">
+                <div class="input-group mb-3 col-md-6">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-lg">Entrada de Dados</span>
+                  </div>
+                  <input type="text" id="arr_dados" class="form-control" aria-label="Large" aria-describedby="inputGroup-sizing-sm" placeholder="separados por ';'" >
+                </div>
+                <div class="input-group mb-3 col-md-6">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-lg">Nome da Variavel</span>
+                  </div>
+                  <input type="text" id="nomeVariavel" class="form-control" aria-label="Large" aria-describedby="inputGroup-sizing-sm" >
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-3"></div>
+                  <div class="input-group mb-3 col-md-3">
+                    <div class="input-group-prepend">
+                      <label class="input-group-text" for="inputGroupSelect01">Opções</label>
+                    </div>
+                    <select class="custom-select" id="value_select">
+                      <option value="1">Quartil</option>
+                      <option value="2">Decil</option>
+                      <option value="3">Quintil</option>
+                      <option value="4">Percentil</option>
+
+                    </select>
+                  </div>
+
+                  <div class="input-group mb-3 col-md-3">
+                    <div class="input-group-prepend">
+                      <label class="input-group-text" for="inputGroupSelect01">%</label>
+                    </div>
+                    <input id="valorSeparatriz" type="number" placeholder="%" class="form-control" min="1" max="100">
+                  </div>
+
+            </div>
+            <div id="table_part" class="row" style="margin-bottom: 10px;">
+                <button type="button" class="btn btn-outline-secondary" style="margin: 0px auto;" onclick="DescButton()">
+                  Entrada dos Dados
+                </button>
+            </div>
+            <div class="row">
+              <div class="custom-file col-md-4" style="margin: 0px auto;">
+                <input type="file" class="custom-file-input" id="customFile">
+                <label class="custom-file-label" for="customFile">Escolher arquivo CSV</label>
+              </div>
+            </div>
+            <hr>
+            <input id="desc_type" type="hidden" style="display:none" value="">
+            <div class="row">
+              <div class="div_table ">
+                  <table class="table table-striped table-dark table-sm" style="border-bottom: 20%" border="1">
+                    <thead>
+                      <th scope="col" id="change_name">VARIAVEL</th>
+                      <th scope="col">FI</th>
+                      <th scope="col">FR%</th>
+                      <th scope="col">FAC</th>
+                      <th scope="col">FAC%</th>
+                    </thead>
+                    <tbody class="table table-striped table-dark table-sm " border="1" id="table_Principal"></tbody>
+                  </table>
+                  <table class="table table-striped table-dark table-sm" style="border-bottom: 20%" border="1" display="">
+                    <tbody class="table table-striped table-dark table-sm " border="1" id="table_secundaria">
+                    
+                    </tbody>
+                   </table>
+              </div>
+            </div>
+            <div class="graficos">
+              <h2 align="center">Grafico</h2>
+              <hr>
+              <canvas id="myChart" class="chart" width="20" height="20"></canvas>
+            </div>
+          </div>
+
+
+          <!---------------------------- Aba Probabilidade --------------------->
+          <div id="Change_Probabilidade">
+            <div class="container" style="width: 100%;">
+              <div id="accordion">
+                <div class="card">
+                  <div class="card-header" id="headingOne">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link my_btn_link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                          DISTRIBUIÇÃO BINOMIAL
+                        </button>
+                    </h5>
+                  </div>
+
+                  <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                    <div class="card-body">
+                      <div class=" container" style="width: 100%;">
+                        <div class="row" style="margin-bottom: 20px;">
+                          <div class="col-md-1"></div>
+                          <div class="col-md-5">
+                            <form class="form-inline">
+                              <div class="input-group">
+                                <div class="input-group-prepend">
+                                  <span class="input-group-text" id="basic-addon1">Amostra</span>
+                                </div>
+                                <input type="text" class="form-control" placeholder="Amostra(N)" aria-label="Username" aria-describedby="basic-addon1" id="binomial_N">
+                              </div>
+                            </form>
+                          </div>
+                          <div class="col-md-5">
+                            <form class="form-inline">
+                              <div class="input-group">
+                                <div class="input-group-prepend">
+                                  <span class="input-group-text" id="basic-addon1">Evento</span>
+                                </div>
+                                <input type="text" class="form-control" placeholder="Evento(K)" aria-label="Username" aria-describedby="basic-addon1" id="binomial_K">
+                              </div>
+                            </form>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-1"></div>
+                          <div class="col-md-5">
+                            <form class="form-inline">
+                              <div class="input-group">
+                                <div class="input-group-prepend">
+                                  <span class="input-group-text" id="basic-addon1">Sucesso</span>
+                                </div>
+                                <input type="text" class="form-control" placeholder="Sucesso(P)" aria-label="Username" aria-describedby="basic-addon1" id="binomial_P">
+                              </div>
+                            </form>
+                          </div>
+                          <div class="col-md-5">
+                            <form class="form-inline">
+                              <div class="input-group">
+                                <div class="input-group-prepend">
+                                  <span class="input-group-text" id="basic-addon1">Fracasso</span>
+                                </div>
+                                <input type="text" class="form-control" placeholder="Fracasso(Q)" aria-label="Username" aria-describedby="basic-addon1" id="binomial_Q">
+                              </div>
+                            </form>
+                          </div>
+                        </div>
+                          <div class="col-md-1" style="margin-bottom: 20px;"></div>
+                          <div class="row">
+                            <div style="margin: 0px auto;">
+                              <button type="button" class="btn btn-dark" data-toggle="modal" data-target=".bd-example-modal-lg" onclick="calc_binomial()">Entrada</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                
+      
+              <div class="card">
+                  <div class="card-header" id="headingTwo">
+                    <h5 class="mb-0">
+                      <button class="btn btn-link collapsed my_btn_link" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        DISTRIBUIÇÃO UNIFORME
+                      </button>
+                    </h5>
+                  </div>
+                  <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                    <div class="card-body">
+                      <div class=" container" style="width: 100%;">
+                        <div class="row" style="margin-bottom: 20px;">
+                          <div class="row col-md-12" style="margin-bottom: 20px;">
+                            <div class="col-md-2"></div>
+                            <div class="col-md-5">
+                              <form class="form-inline">
+                                <div class="input-group">
+                                  <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1">Máximo</span>
+                                  </div>
+                                  <input type="number" class="form-control" placeholder="Ponto máximo" aria-label="Username" aria-describedby="basic-addon1" id="uniforme_max" oninput="probabilidadeUniforme()"> 
+                                </div>
+                              </form>
+                            </div>
+                            
+                            
+                            <div class="col-md-5">
+                              <form class="form-inline">
+                                <div class="input-group">
+                                  <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1">Mínimo</span>
+                                  </div>
+                                  <input type="number" class="form-control" placeholder="Ponto mínimo" aria-label="Username" aria-describedby="basic-addon1" id="uniforme_min" oninput="probabilidadeUniforme()">
+                                </div>
+                              </form>
+                            </div>
+                          </div>
+                        <div class="row col-md-12" style="margin-bottom: 20px;">
+                          <div class="col-md-2"></div>
+                          <div class="col-md-5">
+                            <form class="form-inline">
+                              <div class="input-group">
+                                <div class="input-group-prepend">
+                                  <span class="input-group-text" id="basic-addon1">Mais Que</span>
+                                </div>
+                                <input type="number" class="form-control" placeholder="Mais Que" aria-label="Username" aria-describedby="basic-addon1" id="uniforme_mais" oninput="uniforme_maisq()">
+                              </div>
+                            </form>
+                          </div>
+                          <div class="col-md-5">
+                            <form class="form-inline">
+                              <div class="input-group">
+                                <div class="input-group-prepend">
+                                  <span class="input-group-text" id="basic-addon1">Menos Que </span>
+                                </div>
+                                <input type="number" class="form-control" placeholder="Ponto mínimo" aria-label="Username" aria-describedby="basic-addon1" id="uniforme_menos" oninput="uniforme_menosq()">
+                              </div>
+                            </form>
+                          </div>
+                        </div>
+
+                          <div class="row col-md-12" style="margin-bottom: 20px;">
+                            <div class="col-md-2"></div>
+                            <div class="col-md-5">
+                              <form class="form-inline">
+                                <div class="input-group">
+                                  <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1">Entre </span>
+                                  </div>
+                                  <input type="number" class="form-control" placeholder="Mais Que" aria-label="Username" aria-describedby="basic-addon1" id="uniforme_entre1" oninput="uniforme_entre()">
+                                </div>
+                              </form>
+                            </div>
+                            <div class="col-md-5">
+                              <form class="form-inline">
+                                <div class="input-group">
+                                  <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1"> E </span>
+                                  </div>
+                                  <input type="number" class="form-control" placeholder="Ponto mínimo" aria-label="Username" aria-describedby="basic-addon1" id="uniforme_entre2" oninput="uniforme_entre()">
+                                </div>
+                              </form>
+                            </div>
+                          </div>
+                      
+                          <div class="row col-md-12">
+                              <div class="container" style="border: 2px #9a9a9a dashed; margin-bottom: 20px;">
+                                
+                                <b>RESULTADOS:</b>
+
+                                <div class="result_uniforme">
+                                  <div id="mediaedesvioUniforme"></div>
+                                  <div id="maisqUniforme"></div>
+                                  <div id="entreUniforme"></div>
+                                </div>
+                              </div>
+                          </div>
+                          <div class="row col-md-12">
+                            <div style="margin: 0px auto; ">
+                              <button type="button" class="btn btn-dark" data-toggle="modal" onclick="clearDate()">Limpar Dados</button>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+                <div class="card">
+                  <div class="card-header" id="headingThree">
+                    <h5 class="mb-0">
+                      <button class="btn btn-link collapsed my_btn_link" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        DISTRIBUIÇÃO NORMAL
+                      </button>
+                    </h5>
+                  </div>
+                  <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                    <div class="card-body">
+                      <div class=" container" style="width: 100%;">
+                        <div class="row" style="margin-bottom: 20px;">
+                          <div class="col-md-1"></div>
+                          <div class="col-md-5">
+                            <form class="form-inline">
+                              <div class="input-group">
+                                <div class="input-group-prepend">
+                                  <span class="input-group-text" id="basic-addon1">Qtd</span>
+                                </div>
+                                <input type="text" class="form-control" placeholder="Quantidade" aria-label="Username" aria-describedby="basic-addon1" id="normal_qtd">
+                              </div>
+                            </form>
+                          </div>
+                          
+                          <div class="col-md-5">
+                            <div class="input-group mb-3">
+                              <select class="custom-select" onclick="selectNormal()" id="inputGroupSelect02">
+                                <option value="1" selected>Maior que</option>
+                                <option value="2" >Entre</option>
+                                <option value="0">Menor que</option>
+                              </select>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div id="selected_Entre_Normal" style="margin-bottom: 25px;"></div>
+                        <div class="row">
+                          <div class="col-md-1"></div>
+                          <div class="col-md-5">
+                            <form class="form-inline">
+                              <div class="input-group">
+                                <div class="input-group-prepend">
+                                  <span class="input-group-text" id="basic-addon1">Média</span>
+                                </div>
+                                <input type="text" class="form-control" placeholder="Média" aria-label="Username" aria-describedby="basic-addon1" id="normal_media">
+                              </div>
+                            </form>
+                          </div>
+                          <div class="col-md-5">
+                            <form class="form-inline">
+                              <div class="input-group">
+                                <div class="input-group-prepend">
+                                  <span class="input-group-text" id="basic-addon1">Desvio Padrão</span>
+                                </div>
+                                <input type="text" class="form-control" placeholder="Desvio Padrão" aria-label="Username" aria-describedby="basic-addon1" id="normal_desvio">
+                              </div>
+                            </form>
+                          </div>
+                        </div>
+                          <div class="col-md-1" style="margin-bottom: 20px;"></div>
+                          <div class="row">
+                            <div style="margin: 0px auto;">
+                              <button type="button" class="btn btn-dark" data-toggle="modal" data-target=".bd-example-modal-lg3" onclick="calc_normal()">Entrada</button>
+                            </div>
+                          </div>
+                          
+                        </div>
+                        <div class="row">
+                            
+
+                        </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-------------------------- MODAIS PROBABILIDADE ------------------------------------------>
+
+          <!-- modal BINOMIAL -->
+          <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLongTitle">Resultado Distribuição Binomial</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                   <div class="div_table">
+                  <table class="table table-striped table-dark table-sm" style="border-bottom: 20%" border="1">
+                    <thead>
+                      <th scope="col">Média</th>
+                      <th scope="col">Probabilidade%</th>
+                      <th scope="col">Desvio Padrão</th>
+                      <th scope="col">Coeficiente Variação</th>
+                    </thead>
+                    <tbody class="table table-striped table-dark table-sm " border="1" id="table_Binomial">
+                      
+                    </tbody>
+                  </table>
+              </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal" >Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+          <!-- modal UNIFORME -->
+          <div class="modal fade bd-example-modal-lg2" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLongTitle">Resultado Distribuição Uniforme</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                   <div class="div_table ">
+                  <table class="table table-striped table-dark table-sm" style="border-bottom: 20%" border="1">
+                    <thead>
+                      <th scope="col">Média</th>
+                      <th scope="col">Probabilidade%</th>
+                      <th scope="col">Desvio Padrão</th>
+                      <th scope="col">Coeficiente Variação</th>
+                    </thead>
+                    <tbody class="table table-striped table-dark table-sm " border="1" id="table_Uniforme">
+                      
+                    </tbody>
+                  </table>
+              </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal" >Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+          <!-- modal NORMAL -->
+          <div class="modal fade bd-example-modal-lg3" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLongTitle">Resultado Distribuição Normal</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                   <div class="div_table ">
+                  <table class="table table-striped table-dark table-sm" style="border-bottom: 20%" border="1">
+                    <thead>
+                      <th scope="col">Média</th>
+                      <th scope="col">Probabilidade%</th>
+                      <th scope="col">Desvio Padrão</th>
+                      <th scope="col">Coeficiente Variação</th>
+                    </thead>
+                    <tbody class="table table-striped table-dark table-sm " border="1" id="table_Normal">
+                      
+                    </tbody>
+                  </table>
+              </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal" >Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-----------------------FIM MODAIS PROBABILIDADE ------------------------------------------>
+
+          <!---------------------------- Aba Correlação e Regressão --------------------->
+          <div id="Change_CorelaRegress" >
+            <div class="container" style="margin-top: 50px; border: #9fa0a0 2px dashed; padding: 9%;" >
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1">(X)</span>
+                </div>
+                <input type="text" id="varX" class="form-control" placeholder="Insira os valores separados por ';' " aria-label="Username" aria-describedby="basic-addon1">
+              </div>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1">(Y)</span>
+                </div>
+                <input type="text" id="varY" class="form-control" placeholder="Insira os valores separados por ';'" aria-label="Username" aria-describedby="basic-addon1">
+              </div>
+              <div class="row">
+                  <div class="col-md-12">
+                    <button type="button" onclick="corelacao()" class="btn btn-secondary col-md-12" style="margin-bottom: 5px;">Entrada</button>
+                    <div class="custom-file">
+                      <input type="file" class="custom-file-input" id="customFile">
+                      <label class="custom-file-label" for="customFile">Escolher arquivo CSV</label>
+                    </div>                 
+                  </div>
+              </div>
+              <div id='corelacao_results'></div>
+              <hr>
+              Pontos Futuros
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1">(X)</span>
+                </div>
+                <input type="text" id="x_future" oninput='regressaoX()' class="form-control" placeholder="Insira os valores separados por ';' " aria-label="Username" aria-describedby="basic-addon1">
+              </div>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1">(Y)</span>
+                </div>
+                <input type="text" id="y_future" oninput='regressaoY()' class="form-control" placeholder="Insira os valores separados por ';'" aria-label="Username" aria-describedby="basic-addon1">
+              </div>
+              <div id="regressao_future"></div>
+
+            </div> 
+
+            <hr>
+            <div class="graficos">
+              <h2 align="center">Grafico</h2>
+              <hr>
+              <canvas id="myChartgraficoCorrelacao" class="chart" width="20" height="20"></canvas>
+            </div>             
+          </div>
+          
+          
+
+          <!---------------------------- Aba Sobre nós --------------------->
+          <div id="Change_sobreNos" style="margin-top: 10px; margin-bottom: 60px !important; padding: 5%;">
+            <div class="row">
+              <div class="col-sm-6 col-md-4 myThumb" >
+                <div class="thumbnail">
+                  <img src="img/anderson.jpg" class="img-thumbnail">
+                  <div class="caption">
+                    <h3>Anderson</h3>
+                    <p>Nome: Anderson Tiago Bonamim Costa</p>
+                    <p>Estado Civil: Solteiro</p>
+                    <p>Cidade: Franca</p>
+                    <p>Contato: andersonbonamim@gmail.com</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6 col-md-4 myThumb">
+                <div class="thumbnail">
+                  <img src="img/gabriel.jpg" class="img-thumbnail" width="255x255">
+                  <div class="caption ">
+                    <h3>Gabriel</h3>
+                    <p>Nome: Gabriel Lopes de Azevedo</p>
+                    <p>Estado Civil: Solteiro</p>
+                    <p>Cidade: Franca</p>
+                    <p>Contato: gabrielaz.2206@gmail.com</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6 col-md-4 myThumb">
+                <div class="thumbnail">
+                  <img src="img/guilherme.jpg" class="img-thumbnail">
+                  <div class="caption">
+                    <h3>Guilherme</h3>
+                    <p>Nome: Guilherme Henrique Andrade Pimentel</p>
+                    <p>Estado Civil: Solteiro</p>
+                    <p>Cidade: Franca</p>
+                    <p>Contato: guilhermehap12@gmail.com</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+
+        </div>
+
+        
+
+
+
+
+      <!-- Footer -->
+      <footer class="page-footer font-small blue">
+        <div class="footer-copyright text-center py-3" style="margin: 0px auto">
+          © 2020 developed by Alunos FATEC Franca:
+          <a href="#"> Tribe Statistic</a>
+        </div>
+      </footer>
+      <!-- Footer -->
+
+  <script src="bootstrap/js/jquery-slim.js"></script>
+  <script src="bootstrap/js/popper.js"></script>
+  <script src="bootstrap/js/bootstrap.js"></script>
+  <script src="js/chart.js"></script>
+  <script src="js/script.js"></script>
+</body>
+</html>

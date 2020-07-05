@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="css/style_login.css">
+    
+    <script src="js/login.js" type="text/javascript"></script>
+</head>
+<div class="container ">
+    <div class="content first-content">
+        <div class="first-column">
+            <h2 class="title title-primeiro">Bem-vindo!</h2>
+            <p class="description description-primeiro">Conecte com a gente</p>
+            <p class="description description-primeiro">por favor entre com os seus dados</p>
+            <button id="signin" class="btn btn-primeiro">entrar</button>
+        </div>
+        <div class="second-column">
+            <h2 class="title title-second">Cadastra-se</h2>
+       
+            <p class="description description-second">faça uma conta para os seus dados ficarem salvos</p>
+            <form class="form">
+                <label class="label-input" for="">
+                    <img class="users" src="img/email.png">
+                    </i>
+                    <input type="email" placeholder="Email">
+                </label>
+                <label class="label-input" for="">
+                    <img class="emails" src="img/user.png">
+                    <input class="col-md-12" type="text" placeholder="Usuário">
+                </label>
+
+                <label class="label-input" for="">
+                    <img class="senhas" src="img/senha.png">
+                    <input type="password" placeholder="Senha">
+                </label>
+                <button  class="btn btn-second">Cadastrar</button>
+            </form>
+
+        </div>
+    </div>
+    <div class="content second-content">
+        <div class="first-column">
+            <h2 class="title title-primeiro">Bem vindo de volta</h2>
+            <p class="description description-primeiro">Entre com os seus dados</p>
+            <p class="description description-primeiro">seus dados está seguro</p>
+            <button id="signup" class="btn btn-primeiro">entrar</button>
+        </div>
+        <div class="second-column">
+            <h2 class="title title-second">Bem vindo de volta</h2>
+            <p class="description description-second">use seu e-mail que está cadastrado</p>
+            <form class="form">
+
+                <label class="label-input" for="">
+                    <img class="emails" src="img/email.png">
+                    <input type="email" placeholder="Email" id=email>
+                </label>
+
+                <label class="label-input senha" for="">
+                    <img class="senhas" src="img/senha.png">
+                    <input type="password" placeholder="Senha" id="senha">
+                </label>
+                <h4>Esqueceu a senha?</h4>
+                <button onclick="logar()" class="btn btn-second">Entrar</button>
+            </form>
+        </div>
+    </div>
+</div>
+<script src="js/app.js"></script>
+
+</body>
+
+</html>

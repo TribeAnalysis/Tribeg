@@ -686,9 +686,9 @@ function MountTableMetricaDesc(MedidaSeparatriz, media, mediana, moda, desvioPad
 function mountChart(col_variavel, col_fr, tipoDescritiva) {
 	var type_chart = ""
 	if (tipoDescritiva == "NOMINAL" || tipoDescritiva == "ORDINAL") {
-		type_chart = "bar"
-	} else if (tipoDescritiva == "DISCRETA") {
 		type_chart = "pie"
+	} else if (tipoDescritiva == "DISCRETA") {
+		type_chart = "bar"
 	}
 
 	var color = []
